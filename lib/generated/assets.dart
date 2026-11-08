@@ -8,6 +8,21 @@ import 'package:flutter_svg/flutter_svg.dart';
 class Assets {
   Assets._();
 
+  static const $AssetsGenImages images = $AssetsGenImages();
+  static const $AssetsGenSvgs svgs = $AssetsGenSvgs();
+}
+
+class $AssetsGenSvgs {
+  const $AssetsGenSvgs();
+
+  final SvgGenImage backgroundLogo = const SvgGenImage('assets/svgs/background_logo.svg');
+  final SvgGenImage docdocLogo = const SvgGenImage('assets/svgs/docdoc_logo.svg');
+}
+
+class $AssetsGenImages {
+  const $AssetsGenImages();
+
+  final AssetGenImage onboardingDoctor = const AssetGenImage('assets/images/onboarding_doctor.png');
 }
 
 class AssetGenImage {
@@ -93,6 +108,62 @@ class AssetGenImage {
     );
   }
   
+  String get path => _assetName;
+
+  String get keyName => _assetName;
+}
+
+class SvgGenImage {
+  const SvgGenImage(this._assetName);
+
+  final String _assetName;
+
+SvgPicture svg({
+  Key? key,
+  bool matchTextDirection = false,
+  AssetBundle? bundle,
+  String? package,
+  double? width,
+  double? height,
+  BoxFit fit = BoxFit.contain,
+  AlignmentGeometry alignment = Alignment.center,
+  bool allowDrawingOutsideViewBox = false,
+  WidgetBuilder? placeholderBuilder,
+  String? semanticsLabel,
+  bool excludeFromSemantics = false,
+  SvgTheme? theme,
+  ColorFilter? colorFilter,
+  Clip clipBehavior = Clip.hardEdge,
+}) {
+  return SvgPicture.asset(
+    _assetName,
+    key: key,
+    matchTextDirection: matchTextDirection,
+    bundle: bundle,
+    package: package,
+    width: width,
+    height: height,
+    fit: fit,
+    alignment: alignment,
+    allowDrawingOutsideViewBox: allowDrawingOutsideViewBox,
+    placeholderBuilder: placeholderBuilder,
+    semanticsLabel: semanticsLabel,
+    excludeFromSemantics: excludeFromSemantics,
+    theme: theme,
+    colorFilter: colorFilter,
+    clipBehavior: clipBehavior,
+  );
+}
+  Widget custom({
+    Key? key,
+    required Widget Function(BuildContext context, String assetPath) builder,
+  }) {
+    return Builder(
+      key: key,
+      builder: (context) => builder(context, _assetName),
+    );
+  }
+
   String get path => _assetName;
 
   String get keyName => _assetName;
